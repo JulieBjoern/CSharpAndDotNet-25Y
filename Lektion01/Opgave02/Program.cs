@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Opgave02.model;
 
 namespace Opgave02;
 
@@ -7,9 +8,37 @@ class Program
     static void Main(string[] args)
     {
         string json = GetPotterJson();
-        
-        // TODO: Deserialiser JSON-strengen til en liste af objekter (opret en model i Opgave02/model mappen)
-        // TODO: Udskriv navn og kollegium (HogwartsHouse) for alle karakterer
+
+        // Opgave 2.2: Deserialiser JSON-strengen til en liste af PotterCharacter.
+        // PropertyNameCaseInsensitive gør, at "fullName" i JSON matcher FullName i C#.
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+        List<PotterCharacter> characters = JsonSerializer.Deserialize<List<PotterCharacter>>(json, options)!;
+
+        // Opgave 2.3.1: Udskriv navn og kollegium for alle karakterer.
+        Console.WriteLine("Alle karakterer: ");
+        foreach (PotterCharacter character in characters)
+        {
+            Console.WriteLine($"{character.FullName} - {character.HogwartsHouse}"); // Dollartegn: string interpolation,
+                                                                                    // i stedet for at bruge concatenation med +.
+                                                                                    
+        }
+
+        // Opgave 2.3.2: Udskriv alle karakterer fra Gryffindor.
+        Console.WriteLine("\nGryffindor: ");
+        foreach (PotterCharacter character in characters.Where(c => c.HogwartsHouse == "Gryffindor")) // .where er en LINQ extension method, der filtrerer en liste.
+        {
+            Console.WriteLine(character.FullName);
+        }
+
+        // Opgave 2.3.3: Udskriv karakterer med børn samt børnenes navne.
+        Console.WriteLine("\nKarakterer med børn: ");
+        foreach (PotterCharacter character in characters.Where(c => c.Children.Count > 0))
+        {
+            Console.WriteLine($"{character.FullName} har børnene: {string.Join(", ", character.Children)}");
+        }
     }
 
 
