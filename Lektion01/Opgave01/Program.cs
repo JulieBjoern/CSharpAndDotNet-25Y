@@ -36,7 +36,7 @@ class Program
     public static Item GetItem()
     {
         return new Item("Kaffe", 25.50m);
-    } 
+    }
 
     public static Order GetOrder()
     {
