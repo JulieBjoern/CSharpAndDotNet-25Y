@@ -30,6 +30,7 @@ class Program
         Console.WriteLine("\nGryffindor: ");
         foreach (PotterCharacter character in characters.Where(c => c.HogwartsHouse == "Gryffindor")) // .where er en LINQ extension method, der filtrerer en liste.
         {
+          // uden linq = if (character.HogwartsHouse == "Gryffindor") { Console.WriteLine(character.FullName); }
             Console.WriteLine(character.FullName);
         }
 
