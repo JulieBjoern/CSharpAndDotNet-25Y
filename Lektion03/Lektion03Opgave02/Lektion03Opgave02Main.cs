@@ -2,6 +2,8 @@ namespace Lektion03Opgave02;
 
 // TODO: Opret den manglende 'LogHandler' delegate med den korrekte signatur her!
 
+public delegate void LogHandler(string log, DateTime timestamp);
+
 class Lektion03Opgave02Main
 {
     static void Main(string[] args)
@@ -10,9 +12,9 @@ class Lektion03Opgave02Main
         string[] systemLogs = { "Server startet", "Bruger logget ind", "Databaseforbindelse mistet" };
 
         // Koden sender et lambda-udtryk med to parametre
-        processor.ProcessLogs(systemLogs, (message, timestamp) => 
+        processor.ProcessLogs(systemLogs, (log, timestamp) => 
         {
-            Console.WriteLine($"[{timestamp:HH:mm:ss}] LOG: {message}");
+            Console.WriteLine($"[{timestamp:HH:mm:ss}] LOG: {log}");
         });
     }
 }
