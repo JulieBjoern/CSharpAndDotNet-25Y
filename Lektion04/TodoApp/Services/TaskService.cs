@@ -12,9 +12,9 @@ public class TaskService : ITaskService
     // skal listen beskyttes med f.eks. lock eller ConcurrentDictionary.
     private readonly List<TaskItem> _tasks =
     [
-        new TaskItem(1, "Opret API", "Opret en API med C# og .NET 10", false, DateTime.Now),
-        new TaskItem(2, "C# syntax", "Bliv bedre til C# syntax og brug af .NET", false, DateTime.Now),
-        new TaskItem(3, "Luft Mame", "Gå en tur ovre i skoven med Bønnen", true, DateTime.Now),
+        new TaskItem(1, "Opret API", "Opret en API med C# og .NET 10", false, DateTime.UtcNow),
+        new TaskItem(2, "C# syntax", "Bliv bedre til C# syntax og brug af .NET", false, DateTime.UtcNow),
+        new TaskItem(3, "Luft Mame", "Gå en tur ovre i skoven med Bønnen", true, DateTime.UtcNow),
     ];
 
     public List<TaskItem> GetAll(bool? isCompleted)
@@ -42,7 +42,7 @@ public class TaskService : ITaskService
             Title: createTaskDto.Title,
             Description: createTaskDto.Description,
             IsCompleted: createTaskDto.IsCompleted,
-            CreatedAt: DateTime.Now
+            CreatedAt: DateTime.UtcNow
         );
 
         _tasks.Add(newTask);

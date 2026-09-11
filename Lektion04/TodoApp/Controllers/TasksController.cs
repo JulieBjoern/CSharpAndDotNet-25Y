@@ -18,6 +18,7 @@ public class TasksController : ControllerBase
     }
 
     [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public IActionResult Get(bool? isCompleted) // kan også være public ActionResult<List<TaskItem>> get() forskellen er at IActionResult er mere generel
                                // og kan returnere forskellige typer svar, mens ActionResult<List<TaskItem>> er mere specifik og indikerer,
                                // at metoden returnerer en liste af TaskItems.
@@ -42,6 +43,7 @@ public class TasksController : ControllerBase
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)] // Returneres automatisk af [ApiController], hvis valideringen af CreateTaskDto fejler (f.eks. manglende Title).
     public IActionResult Create(CreateTaskDto createTaskDto)
     {
         var newTask = _taskService.Create(createTaskDto);
@@ -53,6 +55,7 @@ public class TasksController : ControllerBase
     [HttpPut]
     [Route("{id:int}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)] // Returneres automatisk af [ApiController], hvis request body'en er ugyldig.
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult Update(int id, UpdateTaskDto updateTaskDto)
     {
