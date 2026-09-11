@@ -1,8 +1,12 @@
 using Scalar.AspNetCore;
+using TodoApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+// ITaskService registreres som singleton: samme instans deles mellem alle requests i hele app'ens levetid.
+builder.Services.AddSingleton<ITaskService, TaskService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
